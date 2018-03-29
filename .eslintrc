@@ -13,7 +13,8 @@
         ],
         "no-console": "off",
         "no-extra-semi": "warn",
-        "indent": ["error", 4]
-
+        "indent": ["error", 4],
+        "comma-dangle": "warn",
+        "no-use-before-define": ["error", { "functions": false, "classes": true }],
     }
 }
