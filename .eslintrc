@@ -7,14 +7,15 @@
         "mocha": true
     },
     "rules": {
+        "no-console": "off",
+        "indent": "off",
+        "no-tabs": "off",
+        "comma-dangle": "warn",
+        "no-extra-semi": "warn",
         "no-unused-vars": [
             "warn",
             { "vars": "all", "args": "none" }
         ],
-        "no-console": "off",
-        "no-extra-semi": "warn",
-        "indent": ["error", 4],
-        "comma-dangle": "warn",
         "no-use-before-define": ["error", { "functions": false, "classes": true }],
     }
 }
