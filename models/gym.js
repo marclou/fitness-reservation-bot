@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-const gymSchema = new mongoose.Schema({
+const GymSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Gym name is required'],
         trim: true,
+        unique: true,
     },
     address: {
         value: {
@@ -15,7 +16,7 @@ const gymSchema = new mongoose.Schema({
         coordinates: {
             longitude: Number,
             latitude: Number,
-        }
+        },
     },
     maxAttendance: {
         type: Number,
@@ -35,7 +36,18 @@ const gymSchema = new mongoose.Schema({
     },
 });
 
-const Gym = mongoose.model('Gym', gymSchema);
+GymSchema.statics.findByName = function (name) {
+	const Gym = this;
+
+	return Gym.findOne({ name }).then((gym) => {
+		if (!gym) {
+			return Promise.reject(new Error('Gym name doesn\'t match existing gyms'));
+		}
+		return Promise.resolve(gym);
+	});
+};
+
+const Gym = mongoose.model('Gym', GymSchema);
 
 module.exports = {
     Gym,
