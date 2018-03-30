@@ -31,9 +31,12 @@ const WorkoutSchema = new mongoose.Schema({
             max: 50000,
         },
     },
-    attendants: {
-        type: Number,
-    },
+    attendants: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
     date: {
         type: Date,
         required: [true, 'Workout date is required'],
