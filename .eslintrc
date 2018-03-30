@@ -4,7 +4,7 @@
         "browser": true,
         "node": true,
         "es6": true,
-        "mocha": true
+        "mocha": true,
     },
     "rules": {
         "no-console": "off",
@@ -13,12 +13,15 @@
         "no-underscore-dangle": "off",
         "func-names": "off",
         "prefer-arrow-callback": "off",
+        "global-require": "off",
         "comma-dangle": "warn",
+        "arrow-body-style": "warn",
         "no-extra-semi": "warn",
         "no-unused-vars": [
             "warn",
             { "vars": "all", "args": "none" }
         ],
+        "no-trailing-spaces": ["warn", { "skipBlankLines": true }],
         "no-use-before-define": ["error", { "functions": false, "classes": true }],
     }
 }
