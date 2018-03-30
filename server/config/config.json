@@ -1,10 +1,10 @@
 {
   "test": {
     "PORT": 3000,
-    "MONGODB_URI": "mongodb://localhost:27017/WonjiFit"
+    "MONGODB_URI": "mongodb://localhost:27017/WonjiFitTest"
   },
   "development": {
     "PORT": 3000,
-    "MONGODB_URI": "mongodb://localhost:27017/WonjiFitTest"
+    "MONGODB_URI": "mongodb://localhost:27017/WonjiFit"
   }
 }
