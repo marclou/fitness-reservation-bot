@@ -10,6 +10,9 @@
         "no-console": "off",
         "indent": "off",
         "no-tabs": "off",
+        "no-underscore-dangle": "off",
+        "func-names": "off",
+        "prefer-arrow-callback": "off",
         "comma-dangle": "warn",
         "no-extra-semi": "warn",
         "no-unused-vars": [
