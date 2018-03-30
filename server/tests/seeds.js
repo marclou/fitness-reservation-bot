@@ -1,6 +1,5 @@
 const { ObjectID } = require('mongodb');
 
-const { app } = require('./../app');
 const { Gym, Workout } = require('./../models/index');
 
 const gyms = [
@@ -65,5 +64,5 @@ module.exports = {
     gyms,
     workouts,
     populateGyms,
-    populateWorkouts
+    populateWorkouts,
 };
