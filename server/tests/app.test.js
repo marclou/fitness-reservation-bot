@@ -17,7 +17,7 @@ beforeEach(populateGyms);
 beforeEach(populateWorkouts);
 
 describe('Save Documents', () => {
-	it('Should save a workout with a gym name parameter', (done) => {
+	it('Should save a workout even though location provided is a gym name paramater (and not its ObjectID)', (done) => {
 		const {
 			name,
 			_id,
