@@ -66,14 +66,12 @@ const WorkoutSchema = new mongoose.Schema({
             trim: true,
         },
     },
-    createdAt: {
-        type: Date,
-        default: Date.now(),
-    },
+}, {
+    timestamps: {},
 });
 
 function dateValidator(value) {
-    return this.createdAt < value;
+    return value > Date.now();
 }
 
 const Workout = mongoose.model('Workout', WorkoutSchema);

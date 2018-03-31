@@ -34,6 +34,8 @@ const GymSchema = new mongoose.Schema({
             default: false,
         },
     },
+}, {
+    timestamps: {},
 });
 
 GymSchema.statics.findByName = function (name) {
