@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { ObjectId } = require('mongoose').Types;
 
 const WorkoutSchema = new mongoose.Schema({
     name: {
@@ -14,7 +13,7 @@ const WorkoutSchema = new mongoose.Schema({
     },
     duration: {
         type: Number,
-        default: () => 60,
+        default: 60,
         min: 10,
         max: 240,
     },
