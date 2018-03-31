@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const { ObjectId } = require('mongoose').Types;
+const validator = require('validator');
+
+const { Workout } = require('./workout');
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -7,11 +9,13 @@ const UserSchema = new mongoose.Schema({
             type: String,
             required: [true, 'First name is required'],
             trim: true,
+            minLength: 3,
         },
         last: {
             type: String,
             required: [true, 'Last name is required'],
             trim: true,
+            minLength: 1,
         },
     },
     age: {
@@ -40,6 +44,14 @@ const UserSchema = new mongoose.Schema({
         enum: ['0', '1', '2'],
         default: '1',
     },
+    email: {
+        type: String,
+        validate: [emailValidator, 'Should be a valid e-mail'],
+    },
+    phone: {
+        type: String,
+        validate: [phoneValidator, 'Should be a valid phone number'],
+    },
     miscellaneous: {
         session: {},
         timeZone: {},
@@ -50,6 +62,37 @@ const UserSchema = new mongoose.Schema({
     timestamps: {},
 });
 
+function phoneValidator(value) {
+    return validator.isMobilePhone(value, 'en-US', 'ko-KR');
+}
+
+function emailValidator(value) {
+    return validator.isEmail(value);
+}
+
+UserSchema.methods.addWorkout = function (workoutID, userGuests = 0) {
+    const user = this;
+
+    return Workout.findById(workoutID).populate('location')
+        .then((workout) => {
+            const { attendants, guests, location } = workout;
+            const totalAttendants = attendants.length + guests.length;
+
+            if (totalAttendants + userGuests < location.maxAttendance) {
+                return user.update({ $push: { workouts: workoutID } }, { new: true })
+                    .then(() => {
+                        return workout.update({ $push: { attendants: user._id } }, { new: true });
+                            // .then(() => {
+                            //     return {
+                            //         user,
+                            //         workout,
+                            //     };
+                            // });
+                    });
+            }
+            return Promise.reject(new Error('The workout gym is already full'));
+        });
+};
 
 const User = mongoose.model('User', UserSchema);
 
