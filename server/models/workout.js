@@ -37,6 +37,19 @@ const WorkoutSchema = new mongoose.Schema({
             ref: 'User',
         },
     ],
+    guests: [
+        {
+            invitedBy: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: true,
+            },
+            name: {
+                type: String,
+                trim: true,
+            },
+        },
+    ],
     date: {
         type: Date,
         required: [true, 'Workout date is required'],
