@@ -70,7 +70,7 @@ function emailValidator(value) {
     return validator.isEmail(value);
 }
 
-UserSchema.methods.addWorkout = function (workoutID, userGuests = 0) {
+UserSchema.methods.addWorkout = function (workoutID, userGuests = []) {
     const user = this;
 
     return Workout.findById(workoutID).populate('location')
@@ -78,17 +78,30 @@ UserSchema.methods.addWorkout = function (workoutID, userGuests = 0) {
             const { attendants, guests, location } = workout;
             const totalAttendants = attendants.length + guests.length;
 
-            if (totalAttendants + userGuests < location.maxAttendance) {
-                return user.update({ $push: { workouts: workoutID } }, { new: true })
-                    .then(() => {
-                        return workout.update({ $push: { attendants: user._id } }, { new: true });
-                            // .then(() => {
-                            //     return {
-                            //         user,
-                            //         workout,
-                            //     };
-                            // });
+            if (totalAttendants + userGuests.length < location.maxAttendance) {
+                let guestsToInsert = [];
+
+                if (userGuests.length > 0) {
+                    guestsToInsert = userGuests.map((guest) => {
+                        return {
+                            invitedBy: user._id,
+                            name: guest,
+                        };
                     });
+                }
+
+                return user.update({ $push: { workouts: workoutID } }, { new: true })
+                    .then(() => workout.update(
+                        {
+                            $push: {
+                                attendants: user._id,
+                                guests: {
+                                    $each: guestsToInsert,
+                                },
+                            },
+                        },
+                        { new: true },
+                    ));
             }
             return Promise.reject(new Error('The workout gym is already full'));
         });
