@@ -1,6 +1,30 @@
 const { ObjectID } = require('mongodb');
 
-const { Gym, Workout } = require('./../models/index');
+const { Gym, Workout, User } = require('./../models/index');
+
+const users = [
+    {
+        _id: new ObjectID(),
+        name: {
+            first: 'Marc',
+            last: 'Lou',
+        },
+        age: 24,
+        locale: 'en',
+        gender: 'male',
+        email: 'marc.louvion@gmail.com',
+    }, {
+        _id: new ObjectID(),
+        name: {
+            first: 'Jihyeon',
+            last: 'Won',
+        },
+        age: 25,
+        locale: 'kr',
+        gender: 'female',
+        email: 'jwjp@gmail.com',
+    },
+];
 
 const gyms = [
     {
@@ -9,7 +33,7 @@ const gyms = [
         address: {
             value: '123 rue des moches',
         },
-        maxAttendance: 50,
+        maxAttendance: 5,
 	}, {
         _id: new ObjectID(),
         name: 'MarcFit',
@@ -50,6 +74,11 @@ const workouts = [
     },
 ];
 
+const populateUsers = async () => {
+    await User.remove({});
+    await User.insertMany(users);
+};
+
 const populateGyms = async () => {
     await Gym.remove({});
     await Gym.insertMany(gyms);
@@ -61,8 +90,10 @@ const populateWorkouts = async () => {
 };
 
 module.exports = {
+    users,
     gyms,
     workouts,
+    populateUsers,
     populateGyms,
     populateWorkouts,
 };
