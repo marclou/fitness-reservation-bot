@@ -95,12 +95,15 @@ describe('UPDATE', () => {
 	it('# User saving workout with too much guests', (done) => {
 		const userModel = new User(users[0]);
 		const workoutID = workouts[0]._id;
-		const invalidGuests = 50;
+		const invalidGuests = ['Marc', 'Sacha', 'Wonji', 'Bum', 'Jhon'];
 
 		userModel.addWorkout(workoutID, invalidGuests)
 			.then(() => {
-				done(new Error('Not enough guests to valid test'));
-			}).catch(() => done());
+				done(new Error('Should not accept that much guests.'));
+			}).catch((error) => {
+				expect(error).toBeTruthy();
+				done();
+			});
 	});
 
 	it('# User deleting a workout', (done) => {

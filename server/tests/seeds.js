@@ -53,6 +53,12 @@ const workouts = [
 			individual: 10000,
 			group: 5000,
 		},
+        guests: [
+            {
+                invitedBy: users[0],
+                name: 'First Guest',
+            },
+        ],
 		miscellaneous: {
 			en: 'Description',
 			kr: 'Hangul',
