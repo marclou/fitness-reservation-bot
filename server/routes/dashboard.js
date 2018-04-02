@@ -1,5 +1,6 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
+const _ = require('lodash');
 
 const { Workout } = require('./../models/index');
 
@@ -19,23 +20,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/workout', (req, res) => {
-	const {
-		name,
-		location,
-		duration,
-		cost,
-		date,
-		miscellaneous,
-	} = req.body;
-
-	const workoutDoc = new Workout({
-		name,
-		location,
-		duration,
-		cost,
-		date,
-		miscellaneous,
-	});
+	const workoutToAdd = _.pick(req.body, ['name', 'location', 'duration', 'cost', 'date', 'miscellaneous']);
+	const workoutDoc = new Workout({ workoutToAdd });
 
 	workoutDoc.save().then((workout) => {
 		res.status(200).send({ workout });
