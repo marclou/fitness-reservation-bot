@@ -4,6 +4,7 @@
     "description": "MongoDB Model, mongoose based for WonjiFit app",
     "main": "index.js",
     "scripts": {
+        "start": "node server/app.js",
         "test": "export NODE_ENV=test || SET NODE_ENV=test && mocha --timeout 5000 server/**/*.test.js",
         "test-watch": "nodemon --exec 'npm test'"
     },
