@@ -1,19 +1,25 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
 const _ = require('lodash');
+const path = require('path');
+const hbs = require('hbs');
 
 const { Workout } = require('./../models/index');
 
 const router = express.Router();
 
+hbs.registerPartials(path.join(__dirname, '../../', '/views/partials'));
 router.use(express.json());
 
 router.get('/', (req, res) => {
 	Workout.find({ date: { $gte: Date.now() } }).populate('location').then((workouts) => {
-		if (workouts) {
-			res.status(200).send({ workouts });
+		if (!workouts) {
+			return res.status(404).send({ error: 'No up-coming workout found' });
 		}
-		return res.status(404).send({ error: 'No up-coming workout found' });
+		res.render('dashboard.hbs', {
+			pageTitle: 'Dashboard',
+			body: workouts,
+		});
 	}).catch((error) => {
 		res.status(400).send({ error });
 	});
@@ -30,7 +36,7 @@ router.get('/workout/:id', (req, res) => {
 		if (workout) {
 			res.status(200).send({ workout: workout.toJSON() });
 		}
-		return res.status(404).send({ error: 'Error with workout' });
+		return res.status(404).send({ error: 'Workout not found. Verify the ID.' });
 	}).catch((error) => {
 		res.status(400).send({ error });
 	});
