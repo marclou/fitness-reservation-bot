@@ -75,7 +75,7 @@ describe('UPDATE', () => {
 		const userModel = new User(users[0]);
 		const workoutID = workouts[0]._id;
 
-		userModel.addWorkout(workoutID)
+		userModel.subscribeWorkout(workoutID)
 			.then(() => {
 				return User.findById(userModel._id)
 					.then((user) => {
@@ -97,8 +97,8 @@ describe('UPDATE', () => {
 		const workoutID = workouts[0]._id;
 		const invalidGuests = ['Marc', 'Sacha', 'Wonji', 'Bum', 'Jhon'];
 
-		userModel.addWorkout(workoutID, invalidGuests)
-			.then(() => {
+		userModel.subscribeWorkout(workoutID, invalidGuests)
+			.then((res) => {
 				done(new Error('Should not accept that much guests.'));
 			}).catch((error) => {
 				expect(error).toBeTruthy();
