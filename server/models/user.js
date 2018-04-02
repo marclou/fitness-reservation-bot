@@ -70,7 +70,7 @@ function emailValidator(value) {
     return validator.isEmail(value);
 }
 
-UserSchema.methods.addWorkout = function (workoutID, userGuests = []) {
+UserSchema.methods.subscribeWorkout = function (workoutID, userGuests = []) {
     const user = this;
 
     return Workout.findById(workoutID).populate('location')

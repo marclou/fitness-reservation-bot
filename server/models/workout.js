@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const _ = require('lodash');
 
 const WorkoutSchema = new mongoose.Schema({
     name: {
@@ -72,6 +73,14 @@ const WorkoutSchema = new mongoose.Schema({
 function dateValidator(value) {
     return value > Date.now();
 }
+
+WorkoutSchema.methods.toJSON = function () {
+    const workout = this;
+    const workoutObject = workout.toObject();
+
+    return _.pick(workoutObject, ['_id', 'name', 'location', 'date', 'attendants', 'guests', 'duration', 'cost', 'miscellaneous']);
+};
+
 
 const Workout = mongoose.model('Workout', WorkoutSchema);
 
