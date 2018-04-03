@@ -33,13 +33,20 @@ const WorkoutSchema = new mongoose.Schema({
     },
     attendants: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
+            attendantRef: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: true,
+            },
+            hasPaid: {
+                type: Boolean,
+                default: false,
+            },
         },
     ],
     guests: [
         {
-            invitedBy: {
+            invitedByRef: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User',
                 required: true,

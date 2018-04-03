@@ -34,8 +34,15 @@ const UserSchema = new mongoose.Schema({
     },
     workouts: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Workout',
+            workoutRef: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Workout',
+                required: true,
+            },
+            hasPaid: {
+                type: Boolean,
+                default: false,
+            },
         },
     ],
     broadcast: {
@@ -84,17 +91,28 @@ UserSchema.methods.subscribeWorkout = function (workoutID, userGuests = []) {
                 if (userGuests.length > 0) {
                     guestsToInsert = userGuests.map((guest) => {
                         return {
-                            invitedBy: user._id,
+                            invitedByRef: user._id,
                             name: guest,
                         };
                     });
                 }
 
-                return user.update({ $push: { workouts: workoutID } }, { new: true })
+                return user.update(
+                        {
+                            $push: {
+                                workouts: {
+                                    workoutRef: workoutID,
+                                },
+                            },
+                        },
+                        { new: true },
+                    )
                     .then(() => workout.update(
                         {
                             $push: {
-                                attendants: user._id,
+                                attendants: {
+                                    attendantRef: user._id,
+                                },
                                 guests: {
                                     $each: guestsToInsert,
                                 },

@@ -71,27 +71,6 @@ describe('POPULATE', () => {
 });
 
 describe('UPDATE', () => {
-	it('# User saving a workout', (done) => {
-		const userModel = new User(users[0]);
-		const workoutID = workouts[0]._id;
-
-		userModel.subscribeWorkout(workoutID)
-			.then(() => {
-				return User.findById(userModel._id)
-					.then((user) => {
-						expect(user.workouts.length).toBe(1);
-						expect(user.workouts[0].toHexString()).toBe(workoutID.toHexString());
-
-						return Workout.findById(workoutID)
-							.then((workout) => {
-								expect(workout.attendants.length).toBe(1);
-								expect(workout.attendants[0].toHexString()).toBe(user._id.toHexString());
-								done();
-							});
-					});
-			}).catch(error => done(error));
-	});
-
 	it('# User saving workout with too much guests', (done) => {
 		const userModel = new User(users[0]);
 		const workoutID = workouts[0]._id;
@@ -106,7 +85,28 @@ describe('UPDATE', () => {
 			});
 	});
 
-	it('# User deleting a workout', (done) => {
-		done();
+	it('# User saving a workout', (done) => {
+		const userModel = new User(users[0]);
+		const workoutID = workouts[0]._id;
+
+		userModel.subscribeWorkout(workoutID)
+			.then(() => {
+				return User.findById(userModel._id)
+					.then((user) => {
+						expect(user.workouts.length).toBe(1);
+						expect(user.workouts[0].workoutRef.toHexString()).toBe(workoutID.toHexString());
+
+						return Workout.findById(workoutID)
+							.then((workout) => {
+								expect(workout.attendants.length).toBe(1);
+								expect(workout.attendants[0].attendantRef.toHexString()).toBe(user._id.toHexString());
+								done();
+							});
+					});
+			}).catch(error => done(error));
 	});
+
+	// it('# User deleting a workout', (done) => {
+	// 	done();
+	// });
 });

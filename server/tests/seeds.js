@@ -55,7 +55,7 @@ const workouts = [
 		},
         guests: [
             {
-                invitedBy: users[0],
+                invitedByRef: users[0],
                 name: 'First Guest',
             },
         ],
