@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 		}
 		res.render('dashboard.hbs', {
 			pageTitle: 'Dashboard',
-			body: workouts,
+			workouts,
 		});
 	}).catch((error) => {
 		res.status(400).send({ error });
