@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  res.send('<h1> Webhook stuff </h1>');
+  res.send('<h1> Webhook URI </h1>');
 });
 
 module.exports = {

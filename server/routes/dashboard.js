@@ -1,25 +1,16 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
 const _ = require('lodash');
-const path = require('path');
-const hbs = require('hbs');
-
-const { Workout } = require('./../models/index');
+const { Workout, Gym } = require('./../models/index');
 
 const router = express.Router();
 
-hbs.registerPartials(path.join(__dirname, '../../', '/views/partials'));
-router.use(express.json());
-
-router.get('/', (req, res) => {
-	Workout.find({ date: { $gte: Date.now() } }).populate('location').then((workouts) => {
+router.get('/workout/list', (req, res) => {
+	Workout.find({ date: { $gte: Date.now() } }).then((workouts) => {
 		if (!workouts) {
 			return res.status(404).send({ error: 'No up-coming workout found' });
 		}
-		res.render('dashboard.hbs', {
-			pageTitle: 'Dashboard',
-			workouts,
-		});
+		res.status(200).send({ workouts });
 	}).catch((error) => {
 		res.status(400).send({ error });
 	});
@@ -32,12 +23,14 @@ router.get('/workout/:id', (req, res) => {
 		return res.status(404).send({ error: 'Invalid workout ID' });
 	}
 
-	Workout.findById(workoutID).populate('location').then((workout) => {
-		if (workout) {
-			res.status(200).send({ workout: workout.toJSON() });
+	Workout.findById(workoutID).populate('location').populate('attendants').populate('guests')
+	.then((workout) => {
+		if (!workout) {
+			return res.status(404).send({ error: 'Workout not found. Verify the ID.' });
 		}
-		return res.status(404).send({ error: 'Workout not found. Verify the ID.' });
-	}).catch((error) => {
+		res.status(200).send({ workout });
+	})
+	.catch((error) => {
 		res.status(400).send({ error });
 	});
 });
@@ -61,10 +54,10 @@ router.delete('/workout/:id', (req, res) => {
 	}
 
 	Workout.findByIdAndRemove(workoutID).then((workout) => {
-		if (workout) {
-			return res.status(200).send({ workout: workout.toJSON() });
+		if (!workout) {
+			return res.status(404).send({ error: 'Workout not found. Verify the ID.' });
 		}
-		res.status(404).send({ error: 'Workout doesn\'t exist' });
+		res.status(200).send({ workout: workout.toJSON() });
 	}).catch((error) => {
 		res.status(400).send({ error });
 	});
@@ -77,9 +70,22 @@ router.patch('/workout/:id', (req, res) => {
 	if (!ObjectId.isValid(workoutID)) {
 		return res.status(404).send({ error: 'Invalid workout ID' });
 	}
-
 	Workout.findByIdAndUpdate(workoutID, workoutUpdated, { new: true, runValidators: true }).then((workout) => {
+		if (!workout) {
+			return res.status(404).send({ error: 'Workout not found. Verify the ID.' });
+		}
 		res.status(200).send({ workout: workout.toJSON() });
+	}).catch((error) => {
+		res.status(400).send({ error });
+	});
+});
+
+router.get('/gyms', (req, res) => {
+	Gym.find({}).then((gyms) => {
+		if (!gyms) {
+			return res.status(404).send({ error: 'No gyms added yet.' });
+		}
+		res.status(200).send({ gyms });
 	}).catch((error) => {
 		res.status(400).send({ error });
 	});
