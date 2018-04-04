@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/libs/datepicker.min.css">
+  <link rel="stylesheet" href="css/libs/jquery.timepicker.css">
+  <link rel="stylesheet" href="css/main.css">
+  <title> WonjiFit | Add Workout </title>
+</head>
+
+<body>
+  {{> header}}
+
+
+  <h3>Fill-in information</h3>
+
+<form id="workout-add">
+  <p>
+    <label for="name">Name : </label>
+    <input type="text" id="name" name="workout_name" required>
+  </p>
+  <p>
+    <label for="location">Location : </label>
+    <select id="location" name="workout_location" required>
+      {{#each gyms}}
+        <option value="{{this._id}}">{{this.name}}</option>
+      {{/each}}
+    </select>
+  </p>
+  <p>
+    <label for="duration">Duration : </label>
+    <input type="number" id="duration" name="workout_duration" required>
+  </p>
+  <p>
+    <label for="cost_indiv">Cost (indiv) : </label>
+    <input type="number" id="cost_indiv" name="workout_cost_indiv" required>
+  </p>
+  <p>
+    <label for="cost_group">Cost (group) : </label>
+    <input type="number" id="cost_group" name="workout_cost_group" required>
+  </p>
+  <p>
+    <label for="date">Date : </label>
+    <input data-toggle="datepicker" id="date" name="workout_date" required>
+  </p>
+  <p>
+      <label for="time">Time : </label>
+      <input class="timepicker" id="time" name="workout_time" required/>
+  </p>
+  <p>
+    <label for="misc_kr">Misc (kr) : </label>
+    <textarea type="text" id="misc_kr" name="workout_misc_kr"></textarea>
+  </p>
+  <p>
+    <label for="misc_en">Misc (en) : </label>
+    <textarea id="misc_en" name="workout_misc_en"></textarea>
+  </p>
+  <p>
+    <button type="submit">Validate workout</button>
+  </p>
+</form>
+
+<form id="workout-add-payload" action="/workout" method="post">
+    <input type="hidden" name="data" value="">
+</form>
+
+  {{> footer}}
+  <script src="js/libs/jquery-3.3.1.min.js"></script>
+  <script src="js/libs/datepicker.min.js"></script>
+  <script src="js/libs/jquery.timepicker.js"></script>
+  <script src="js/index.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="datepicker"]').datepicker({
+            autoHide: true
+        });
+        $('#time').timepicker({
+            minTime: '10:00 AM',
+            maxTime: '10:00 PM',
+        });
+    });
+  </script>
+</body>
+
+</html>
