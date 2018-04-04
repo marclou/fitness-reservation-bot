@@ -1,0 +1,16 @@
+header {
+    display: flex;
+}
+
+header > p {
+    padding: 10px;
+}
+
+body {
+    padding: 20px;
+}
+
+footer {
+    bottom: 0;
+    position: fixed;
+}
