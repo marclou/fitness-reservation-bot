@@ -1,7 +1,7 @@
 {
     "name": "mongomodel",
     "version": "1.0.0",
-    "description": "MongoDB Model, mongoose based for WonjiFit app",
+    "description": "WonjiFit is a web app to server fitness center customers inquieries through chatbot",
     "main": "index.js",
     "scripts": {
         "start": "node server/app.js",
@@ -14,7 +14,7 @@
     "author": "Marc Lou",
     "license": "ISC",
     "nodemonConfig": {
-        "ext": "hbs js"
+        "ext": "hbs html js"
     },
     "dependencies": {
         "express": "^4.16.3",
