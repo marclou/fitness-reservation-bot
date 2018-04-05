@@ -61,7 +61,7 @@ router.get('/workout/:id', (req, res) => {
 		if (!workout) {
 			return res.status(404).send({ error: 'Workout not found. Verify the ID.' });
 		}
-		res.render('workout', {
+		res.render('workoutDetail', {
             tabTitle: 'Workout Details',
             workout,
         });
