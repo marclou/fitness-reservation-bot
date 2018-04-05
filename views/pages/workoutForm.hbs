@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html>
+{{> header}}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="css/libs/datepicker.min.css">
-  <link rel="stylesheet" href="css/libs/jquery.timepicker.css">
-  <link rel="stylesheet" href="css/main.css">
-  <title> WonjiFit | Add Workout </title>
-</head>
-
-<body>
-  {{> header}}
-
-
-  <h3>Fill-in information</h3>
+<h3>Fill-in information</h3>
 
 <form id="workout-add">
   <p>
@@ -66,11 +52,11 @@
     <input type="hidden" name="data" value="">
 </form>
 
-  <script src="js/libs/jquery-3.3.1.min.js"></script>
-  <script src="js/libs/datepicker.min.js"></script>
-  <script src="js/libs/jquery.timepicker.js"></script>
-  <script src="js/index.js"></script>
-  <script type="text/javascript">
+<script src="js/libs/jquery-3.3.1.min.js"></script>
+<script src="js/libs/datepicker.min.js"></script>
+<script src="js/libs/jquery.timepicker.js"></script>
+<script src="js/index.js"></script>
+<script type="text/javascript">
     $(document).ready(function(){
         $('[data-toggle="datepicker"]').datepicker({
             autoHide: true
@@ -80,7 +66,4 @@
             maxTime: '10:00 PM',
         });
     });
-  </script>
-</body>
-
-</html>
+</script>

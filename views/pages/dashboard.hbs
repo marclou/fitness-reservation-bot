@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html>
+{{> header}}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
-  <title> WonjiFit | Dashboard </title>
-</head>
+<h3> Up-coming Workouts </h3>
 
-<body>
-  {{> header}}
+<ul id="workouts-list">
+  {{#each workouts}}
+    <li>
+      <p><a href="/workout/{{this._id}}">{{this.name}}</a></p>
+    </li>
+  {{/each}}
+</ul>
 
-  <h3> Up-coming Workouts </h3>
-
-  <ul id="workouts-list">
-      {{#each workouts}}
-      <li>
-          <p><a href="/workout/{{this._id}}">{{this.name}}</a></p>
-      </li>
-    {{/each}}
-  </ul>
-
-  {{> footer}}
-  <script src="js/libs/jquery-3.3.1.min.js"></script>
-  <script src="js/index.js"></script>
-</body>
-
-</html>
+{{> footer}}
+<script src="js/libs/jquery-3.3.1.min.js"></script>
+<script src="js/index.js"></script>

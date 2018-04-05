@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
 			return res.status(404).send({ error: 'No up-coming workout found' });
 		}
 		res.render('dashboard', {
-            pageTitle: 'Dashboard',
             workouts,
         });
 	}).catch((error) => {
@@ -25,7 +24,7 @@ router.get('/workout', (req, res) => {
 			return res.status(404).send({ error: 'No gyms added yet.' });
 		}
         res.render('workoutForm', {
-            pageTitle: 'Add a Workout',
+            tabTitle: 'Add Workout',
             gyms,
         });
     }).catch((error) => {
@@ -43,7 +42,7 @@ router.post('/workout', (req, res) => {
         }
         res.redirect(`/workout/${workout._id}`);
 	}).catch((error) => {
-        res.render('errorValidation', {
+        res.render('error', {
             pageTitle: 'Error',
             error,
         });
@@ -63,7 +62,7 @@ router.get('/workout/:id', (req, res) => {
 			return res.status(404).send({ error: 'Workout not found. Verify the ID.' });
 		}
 		res.render('workout', {
-            pageTitle: 'Workout Details',
+            tabTitle: 'Workout Details',
             workout,
         });
 	})
@@ -73,7 +72,7 @@ router.get('/workout/:id', (req, res) => {
 });
 
 router.get('/broadcast', (req, res) => {
-  res.render('broadcast', { pageTitle: 'Broacast to customers' });
+  res.render('broadcast', { tabTitle: 'Broacast' });
 });
 
 module.exports = {
