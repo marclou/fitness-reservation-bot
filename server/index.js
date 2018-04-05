@@ -2,14 +2,12 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 
-const { indexRouter } = require('./routes/index');
-const { dashboardRouter } = require('./routes/dashboard');
-const { webhookRouter } = require('./routes/webhook');
-
 module.exports = function () {
 	const server = express();
 
 	const create = (config) => {
+		const routes = require('./routes');
+
 		// Server setting
 		server.set('hostname', config.hostname);
 		server.set('env', config.env);
@@ -30,10 +28,9 @@ module.exports = function () {
 		server.use(express.json());
 		server.use(express.urlencoded({ extended: false }));
 		server.use(express.static(config.publicDir));
+		
 		// Set up routes
-		server.use('/', indexRouter);
-		server.use('/dashboard', dashboardRouter);
-		server.use('/webhook', webhookRouter);
+		routes.init(server);
 
 		// Connect mongoDB
 		mongoose.connect(config.mongodbUri);
