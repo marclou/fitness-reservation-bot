@@ -1,5 +1,6 @@
 header {
     display: flex;
+    background-color: #DDD;
 }
 
 header > p {
@@ -8,9 +9,11 @@ header > p {
 
 body {
     padding: 20px;
+    margin: 0px;
 }
 
 footer {
     bottom: 0;
+    left: 0;
     position: fixed;
 }
