@@ -10,18 +10,10 @@
 <body>
   {{> header}}
 
-  <h3> {{errorTitle}} </h3>
+  <h3> {{pageTitle}} </h3>
 
   <ul>
-      {{#each errors}}
-        <li>
-            <p>
-                <b>{{this.properties.path}}</b> =
-                <i>{{this.properties.value}}</i> <br />
-                {{this.properties.message}}
-            </p>
-      </li>
-      {{/each}}
+      {{error}}
   </ul>
 
   {{> footer}}

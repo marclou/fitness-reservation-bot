@@ -41,15 +41,17 @@ router.post('/workout', (req, res) => {
         if (!workout) {
             return res.status(404).send({ error: 'Invalid workout information' });
         }
-        res.render('workout', {
-            pageTitle: 'Success !',
-            workout,
+        // Find better way to populate (hook on save() 'post' ?)
+        Workout.populate(workout, { path: 'location' }, () => {
+            res.render('workout', {
+                pageTitle: 'Success !',
+                workout,
+            });
         });
 	}).catch((error) => {
         res.render('errorValidation', {
             pageTitle: 'Error',
-            errorTitle: error._message,
-            errors: Object.values(error.errors),
+            error,
         });
 	});
 });
