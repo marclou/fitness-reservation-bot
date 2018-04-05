@@ -1,12 +1,13 @@
 const expect = require('expect');
 const { ObjectID } = require('mongodb');
+const server = require('./../')();
+const config = require('./../../config');
 
-const { app } = require('./../app');
 const {
 	User,
 	Gym,
 	Workout,
-} = require('./../models/index');
+} = require('./../models');
 const {
 	users,
 	gyms,
@@ -15,6 +16,9 @@ const {
 	populateGyms,
 	populateWorkouts,
 } = require('./seeds.js');
+
+server.create(config);
+server.start();
 
 beforeEach(populateUsers);
 beforeEach(populateGyms);

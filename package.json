@@ -4,8 +4,8 @@
     "description": "WonjiFit is a web app to server fitness center customers inquieries through chatbot",
     "main": "index.js",
     "scripts": {
-        "start": "node server/app.js",
-        "test": "export NODE_ENV=test || SET NODE_ENV=test && mocha --timeout 5000 server/**/*.test.js",
+        "start": "node index.js",
+        "test": "export NODE_ENV=test || SET NODE_ENV=test && mocha --timeout 3000 server/**/*.test.js",
         "test-watch": "nodemon --exec 'npm test'"
     },
     "engines": {
