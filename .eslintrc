@@ -14,6 +14,7 @@
         "prefer-arrow-callback": "off",
         "global-require": "off",
         "consistent-return": "off",
+        "no-mixed-spaces-and-tabs": "off",
         "max-len": "warn",
         "comma-dangle": "warn",
         "arrow-body-style": "warn",
