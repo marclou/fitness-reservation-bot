@@ -2,6 +2,7 @@ const express = require('express');
 const _ = require('lodash');
 const { ObjectId } = require('mongodb');
 const { Workout, Gym } = require('./../models/index');
+const server = require('./../')();
 
 const router = express.Router();
 
@@ -52,12 +53,15 @@ router.post('/workout', (req, res) => {
 	});
 });
 
+router.param('id', (req, res, next, id) => {
+    if (!ObjectId.isValid(id)) {
+        res.status(404).send({ error: 'Invalid workout ID' });
+	}
+    next();
+});
+
 router.get('/workout/:id', (req, res) => {
     const workoutID = req.params.id;
-
-	if (!ObjectId.isValid(workoutID)) {
-		return res.status(404).send({ error: 'Invalid workout ID' });
-	}
 
 	Workout.findById(workoutID).populate('location').populate('attendants').populate('guests')
 	.then((workout) => {
