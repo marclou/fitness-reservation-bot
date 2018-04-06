@@ -33,6 +33,9 @@ router.get('/workout', (req, res) => {
 });
 
 router.post('/workout', (req, res) => {
+    if (!req.body.data) {
+        return res.status(404).send({ error: 'Please fill-in the workout' });
+    }
 	const workoutToAdd = _.pick(JSON.parse(req.body.data), ['name', 'location', 'duration', 'cost', 'date', 'miscellaneous']);
 	const workoutDoc = new Workout(workoutToAdd);
 
