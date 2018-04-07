@@ -4,10 +4,10 @@ $('#workout-remove').on('click', function (e) {
     e.preventDefault();
     if (confirm('Are you sure? Workout will be deleted permanently.')) {
         $.ajax({
-            url: '/dashboard/workout/' + workoutID,
-            type: 'DELETE',
+            url: '/dashboard/workout/' + workoutID + '/delete',
+            type: 'POST',
             success: function (res) {
-                window.location.href = '/';
+                window.location.href = '/dashboard/workout';
                 alert('Successfully deleted :)');
             },
             error: function (err, err1, err2) {

@@ -1,5 +1,4 @@
 const expect = require('expect');
-const { ObjectID } = require('mongodb');
 const server = require('./../')();
 const config = require('./../../config');
 

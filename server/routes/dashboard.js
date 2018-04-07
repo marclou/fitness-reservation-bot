@@ -5,7 +5,10 @@ const gymController = require('../controllers/gymController');
 const broadcastController = require('../controllers/broadcastController');
 
 const router = express.Router();
-
+/**
+ * Middleware that verifies all :ID parameters given in routes and test it's type
+ * Throw an error if not a valid mongoDB ObjectID type
+ */
 router.param('id', (req, res, next, id) => {
     if (!ObjectId.isValid(id)) {
         res.status(404).send({ error: 'Invalid workout ID' });

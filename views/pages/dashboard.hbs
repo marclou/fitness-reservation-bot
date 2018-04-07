@@ -5,11 +5,11 @@
 <ul id="workouts-list">
   {{#each workouts}}
     <li>
-      <p><a href="/workout/{{this._id}}">{{this.name}}</a></p>
+      <p><a href="/dashboard/workout/{{this._id}}">{{this.name}}</a></p>
     </li>
   {{/each}}
 </ul>
 
 {{> footer}}
-<script src="js/libs/jquery-3.3.1.min.js"></script>
-<script src="js/index.js"></script>
+<script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
