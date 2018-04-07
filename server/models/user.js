@@ -77,6 +77,10 @@ function emailValidator(value) {
     return validator.isEmail(value);
 }
 
+UserSchema.virtual('full_name').get(function () {
+    return `${this.name.first} ${this.name.last}`;
+});
+
 UserSchema.methods.subscribeWorkout = function (workoutID, userGuests = []) {
     const user = this;
 

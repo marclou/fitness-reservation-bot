@@ -81,6 +81,10 @@ function dateValidator(value) {
     return value > Date.now();
 }
 
+WorkoutSchema.virtual('url').get(function () {
+    return `/dashboard/workout/${this._id}`;
+});
+
 WorkoutSchema.methods.toJSON = function () {
     const workout = this;
     const workoutObject = workout.toObject();
