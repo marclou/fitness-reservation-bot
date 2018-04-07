@@ -32,6 +32,15 @@ module.exports = function () {
 		// Set up routes
 		routes.init(server);
 
+		// Errors handler
+		server.use((err, req, res, next) => {
+		  res.locals.message = err.message;
+		  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+		  res.status(err.status || 500);
+		  res.render('error', { pageTitle: `Error ${err.status}`, error: err.message });
+		});
+
 		// Connect mongoDB
 		mongoose.connect(config.mongodbUri);
 	};
