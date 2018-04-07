@@ -52,7 +52,7 @@ module.exports = {
             if (!workout) {
                 return res.status(404).send({ error: 'Invalid workout information' });
             }
-            res.redirect(`/dashboard/workout/${workout._id}`);
+            res.redirect(workout.url);
     	}).catch((error) => {
             res.render('error', { pageTitle: 'Error', error });
     	});

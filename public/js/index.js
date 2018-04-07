@@ -1,10 +1,8 @@
 $('#workout-remove').on('click', function (e) {
-    var workoutID = getWorkoutID();
-
     e.preventDefault();
     if (confirm('Are you sure? Workout will be deleted permanently.')) {
         $.ajax({
-            url: '/dashboard/workout/' + workoutID + '/delete',
+            url: window.location.pathname + '/delete',
             type: 'POST',
             success: function (res) {
                 window.location.href = '/dashboard/workout';
@@ -43,8 +41,3 @@ $('#workout-add').on('submit', function () {
     $('#workout-add-payload').submit();
     return false;
 });
-
-function getWorkoutID() {
-    var pathname = window.location.pathname.split('/');
-    return pathname[pathname.length - 1];
-}
