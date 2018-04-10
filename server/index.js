@@ -13,6 +13,7 @@ module.exports = function () {
 		server.set('env', config.env);
         server.set('port', config.port);
 		server.set('viewDir', config.viewDir);
+		server.enable('strict routing');
 
 		// Set up view engine
 		server.engine('hbs', exphbs({
@@ -27,7 +28,7 @@ module.exports = function () {
 		// Middleware
 		server.use(express.json());
 		server.use(express.urlencoded({ extended: false }));
-		server.use(['/dashboard/workout', '/dashboard/broadcast'], express.static(config.publicDir));
+		server.use('/dashboard', express.static(config.publicDir));
 
 		// Set up routes
 		routes.init(server);
