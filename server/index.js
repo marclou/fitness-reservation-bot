@@ -28,7 +28,7 @@ module.exports = function () {
 		// Middleware
 		server.use(express.json());
 		server.use(express.urlencoded({ extended: false }));
-		server.use('/dashboard', express.static(config.publicDir));
+		// server.use('/dashboard', express.static(config.publicDir));
 
 		// Set up routes
 		routes.init(server);
