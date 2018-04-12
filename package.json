@@ -22,6 +22,7 @@
         "hbs": "^4.0.1",
         "http-errors": "^1.6.3",
         "install": "^0.11.0",
+        "jsonwebtoken": "^8.2.1",
         "lodash": "^4.17.5",
         "moment": "^2.21.0",
         "mongodb": "^3.0.5",
