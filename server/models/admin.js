@@ -14,6 +14,7 @@ const AdminSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
+        validate: [passwordValidator, 'Must be at least 4 characters.'],
     },
     tokens: [
         {
@@ -35,6 +36,14 @@ function emailValidator(email) {
         return true;
     }
     return email === 'marc.louvion@gmail.com';
+}
+
+function passwordValidator(password) {
+    // Escape validation in development environment.
+    if (config.env === 'development') {
+        return true;
+    }
+    return password.length > 4;
 }
 
 AdminSchema.methods.generateAuthToken = function () {
