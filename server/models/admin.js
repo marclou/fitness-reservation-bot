@@ -53,9 +53,8 @@ AdminSchema.statics.findByToken = function (token) {
     try {
         decoded = jwt.verify(token, '123ABC');
     } catch (e) {
-        console.log(e);
+        return new Promise((resolve, reject) => reject(e));
     }
-
     return User.findOne({
         '_id': decoded._id,
         'tokens.token': token,
