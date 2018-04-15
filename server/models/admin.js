@@ -46,6 +46,23 @@ AdminSchema.methods.generateAuthToken = function () {
     return user.save().then(() => token);
 };
 
+AdminSchema.statics.findByToken = function (token) {
+    const User = this;
+    let decoded;
+
+    try {
+        decoded = jwt.verify(token, '123ABC');
+    } catch (e) {
+        console.log(e);
+    }
+
+    return User.findOne({
+        '_id': decoded._id,
+        'tokens.token': token,
+        'tokens.access': 'auth',
+    });
+};
+
 const Admin = mongoose.model('Admin', AdminSchema);
 
 module.exports = {
