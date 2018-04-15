@@ -15,6 +15,7 @@
         "global-require": "off",
         "consistent-return": "off",
         "no-mixed-spaces-and-tabs": "off",
+        "quote-props": "off",
         "max-len": "warn",
         "comma-dangle": "warn",
         "arrow-body-style": "warn",
