@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 module.exports = function () {
 	const server = express();
@@ -27,8 +28,8 @@ module.exports = function () {
 
 		// Middleware
 		server.use(express.json());
+		server.use(cookieParser());
 		server.use(express.urlencoded({ extended: false }));
-		// server.use('/dashboard', express.static(config.publicDir));
 
 		// Set up routes
 		routes.init(server);
