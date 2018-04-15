@@ -47,16 +47,16 @@ function passwordValidator(password) {
 }
 
 AdminSchema.methods.generateAuthToken = function () {
-    const user = this;
+    const admin = this;
     const access = 'auth';
-    const token = jwt.sign({ _id: user._id.toHexString() }, config.jwtSalt);
+    const token = jwt.sign({ _id: admin._id.toHexString() }, config.jwtSalt);
 
-    user.tokens = user.tokens.concat({ access, token });
-    return user.save().then(() => token);
+    admin.tokens = admin.tokens.concat({ access, token });
+    return admin.save().then(() => token);
 };
 
 AdminSchema.statics.findByToken = function (token) {
-    const User = this;
+    const Admin = this;
     let decoded;
 
     try {
@@ -64,10 +64,28 @@ AdminSchema.statics.findByToken = function (token) {
     } catch (e) {
         return Promise.reject(e);
     }
-    return User.findOne({
+    return Admin.findOne({
         '_id': decoded._id,
         'tokens.token': token,
         'tokens.access': 'auth',
+    });
+};
+
+AdminSchema.statics.findByCreditentials = function (email, password) {
+    const Admin = this;
+
+    return Admin.findOne({ email }).then((admin) => {
+        if (!admin) {
+            return Promise.reject(new Error('Email doesn\'t exist'));
+        }
+        return new Promise((resolve, reject) => {
+            bcrypt.compare(password, admin.password, (err, res) => {
+                if (res) {
+                    return resolve(admin);
+                }
+                reject(new Error('Incorrect Password'));
+            });
+        });
     });
 };
 
