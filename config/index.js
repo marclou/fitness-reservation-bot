@@ -10,7 +10,7 @@ const _ = require('lodash');
 const env = process.env.NODE_ENV || 'development';
 const defaultConfig = {
     env,
-    jwtSalt: '123ABC',
+    secret: 'IAmReallyHot',
 };
 const envConfig = require(`./${env}`);
 

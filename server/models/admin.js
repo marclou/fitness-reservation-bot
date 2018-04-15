@@ -49,7 +49,7 @@ function passwordValidator(password) {
 AdminSchema.methods.generateAuthToken = function () {
     const admin = this;
     const access = 'auth';
-    const token = jwt.sign({ _id: admin._id.toHexString() }, config.jwtSalt);
+    const token = jwt.sign({ _id: admin._id.toHexString() }, config.secret);
 
     admin.tokens = admin.tokens.concat({ access, token });
     return admin.save().then(() => token);
@@ -60,7 +60,7 @@ AdminSchema.statics.findByToken = function (token) {
     let decoded;
 
     try {
-        decoded = jwt.verify(token, config.jwtSalt);
+        decoded = jwt.verify(token, config.secret);
     } catch (e) {
         return Promise.reject(e);
     }
