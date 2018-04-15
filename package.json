@@ -17,6 +17,7 @@
         "ext": "hbs html js"
     },
     "dependencies": {
+        "bcryptjs": "^2.4.3",
         "express": "^4.16.3",
         "express-handlebars": "^3.0.0",
         "hbs": "^4.0.1",
