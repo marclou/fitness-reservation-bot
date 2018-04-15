@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const config = require('./../../config');
 
 const AdminSchema = new mongoose.Schema({
@@ -13,7 +14,6 @@ const AdminSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 6,
     },
     tokens: [
         {
@@ -40,7 +40,7 @@ function emailValidator(email) {
 AdminSchema.methods.generateAuthToken = function () {
     const user = this;
     const access = 'auth';
-    const token = jwt.sign({ _id: user._id.toHexString() }, '123ABC');
+    const token = jwt.sign({ _id: user._id.toHexString() }, config.jwtSalt);
 
     user.tokens = user.tokens.concat({ access, token });
     return user.save().then(() => token);
@@ -51,9 +51,9 @@ AdminSchema.statics.findByToken = function (token) {
     let decoded;
 
     try {
-        decoded = jwt.verify(token, '123ABC');
+        decoded = jwt.verify(token, config.jwtSalt);
     } catch (e) {
-        return new Promise((resolve, reject) => reject(e));
+        return Promise.reject(e);
     }
     return User.findOne({
         '_id': decoded._id,
@@ -61,6 +61,21 @@ AdminSchema.statics.findByToken = function (token) {
         'tokens.access': 'auth',
     });
 };
+
+AdminSchema.pre('save', function (next) {
+    const admin = this;
+
+    if (admin.isModified('password')) {
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(admin.password, salt, (error, hash) => {
+                admin.password = hash;
+                next();
+            });
+        });
+    } else {
+        next();
+    }
+});
 
 const Admin = mongoose.model('Admin', AdminSchema);
 
