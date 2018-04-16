@@ -37,6 +37,23 @@ module.exports = {
         res.render('gymForm', { tabTitle: 'Add Gym' });
     },
 
+    getUpdateForm: (req, res, next) => {
+        const gymID = req.params.id;
+
+        Gym.findById(gymID)
+        .then((gym) => {
+            if (!gym) {
+                return next(createError(404, 'Gym not found, verify ID'));
+            }
+            res.render('gymForm', {
+                tabTitle: 'Modify Gym',
+                gym,
+            });
+        }).catch((error) => {
+            next(createError(400, error));
+        });
+    },
+
     createOne: (req, res, next) => {
         if (!req.body.data) {
             return next(createError(404, 'Please, fill-in the form'));
@@ -62,6 +79,27 @@ module.exports = {
     			return next(createError(404, 'Gym not found, verify ID'));
     		}
     		res.status(200).send();
+    	}).catch((error) => {
+    		next(createError(400, error));
+    	});
+    },
+
+    updateOne: (req, res, next) => {
+        if (!req.body.data) {
+            return next(createError(404, 'Please, fill-in the form'));
+        }
+
+    	const gymID = req.params.id;
+    	const gymToUpdate = _.pick(JSON.parse(req.body.data), ['name', 'address', 'maxAttendance', 'facilities']);
+
+    	Gym.findByIdAndUpdate(gymID, gymToUpdate, {
+    		new: true,
+    		runValidators: true,
+    	}).then((gym) => {
+    		if (!gym) {
+    			return next(createError(404, 'Gym not found, verify ID'));
+    		}
+    		res.redirect(gym.url);
     	}).catch((error) => {
     		next(createError(400, error));
     	});

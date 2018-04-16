@@ -29,6 +29,8 @@ router.get('/create', workoutController.getCreateForm);
 
 router.post('/create', workoutController.createOne);
 
+router.use('/:id/', express.static(config.publicDir));
+
 router.get('/:id', workoutController.details);
 
 router.post('/:id/update', workoutController.updateOne);

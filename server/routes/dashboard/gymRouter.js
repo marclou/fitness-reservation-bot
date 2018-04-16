@@ -29,7 +29,13 @@ router.get('/create', gymController.getCreateForm);
 
 router.post('/create', gymController.createOne);
 
+router.use('/:id/', express.static(config.publicDir));
+
 router.get('/:id', gymController.details);
+
+router.get('/:id/update', gymController.getUpdateForm);
+
+router.post('/:id/update', gymController.updateOne);
 
 router.post('/:id/delete', gymController.deleteOne);
 
