@@ -1,7 +1,7 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
 const createError = require('http-errors');
-const gymController = require('../../controllers/workoutController');
+const gymController = require('../../controllers/gymController');
 const adminController = require('../../controllers/adminController');
 const config = require('../../../config');
 
@@ -25,7 +25,13 @@ router.all('*', adminController.authenticate);
 
 router.get('/', gymController.list);
 
-router.post('/', gymController.createOne);
+router.get('/create', gymController.getCreateForm);
+
+router.post('/create', gymController.createOne);
+
+router.get('/:id', gymController.details);
+
+router.post('/:id/delete', gymController.deleteOne);
 
 module.exports = {
     gymRouter: router,
