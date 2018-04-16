@@ -38,6 +38,10 @@ const GymSchema = new mongoose.Schema({
     timestamps: {},
 });
 
+GymSchema.virtual('url').get(function () {
+    return `/dashboard/gym/${this._id}`;
+});
+
 GymSchema.statics.findByName = function (name) {
 	const Gym = this;
 
