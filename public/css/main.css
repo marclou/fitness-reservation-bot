@@ -35,6 +35,10 @@ button {
     border-radius: 5px;
 }
 
+#remove {
+    background-color: #FF0000;
+}
+
 button > a {
     color: white;
 }
