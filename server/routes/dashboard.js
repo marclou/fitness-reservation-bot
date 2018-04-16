@@ -25,9 +25,7 @@ router.param('id', (req, res, next, id) => {
     next();
 });
 
-router.get('/', (req, res) => {
-    res.redirect('/dashboard/workout');
-});
+router.get('/', (req, res) => res.render('welcome'));
 
 router.get('/workout', authenticate, workoutController.list);
 
