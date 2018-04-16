@@ -4,7 +4,7 @@ header {
     position: fixed;
     width: 100%;
     display: flex;
-    background-color: #DDD;
+    background-color: #CCC;
 }
 
 header > p {
