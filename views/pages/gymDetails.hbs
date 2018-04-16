@@ -15,13 +15,16 @@
     </li>
     <li>
       <p>
-          Facilities : {{#if gym.facilities.shower}} shower + {{/if}} {{#if gym.facilities.shower}} dressroom {{/if}}
+          Facilities : {{#if gym.facilities.shower}} shower, {{/if}} {{#if gym.facilities.dressRoom}}  dressroom {{/if}}
       </p>
     </li>
   </ul>
 
   <p>
-      <button id="remove"> Remove Gym </button>
+      <button id="remove"> Remove </button>
+  </p>
+  <p>
+      <button><a href="{{gym.url}}/update"> Edit</a></button>
   </p>
 
 {{> footer}}
