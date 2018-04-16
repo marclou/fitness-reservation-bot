@@ -14,7 +14,7 @@ module.exports = function () {
 		server.set('env', config.env);
         server.set('port', config.port);
 		server.set('viewDir', config.viewDir);
-		server.enable('strict routing');
+		// server.enable('strict routing');
 
 		// Set up view engine
 		server.engine('hbs', exphbs({
