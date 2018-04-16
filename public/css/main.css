@@ -35,6 +35,10 @@ button {
     border-radius: 5px;
 }
 
+button > a {
+    color: white;
+}
+
 footer {
     bottom: 0;
     left: 0;

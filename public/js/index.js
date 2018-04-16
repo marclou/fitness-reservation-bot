@@ -5,7 +5,7 @@ $('#remove').on('click', function (e) {
     e.preventDefault();
     if (confirm('Are you sure? It will be deleted permanently.')) {
         $.ajax({
-            url: window.location.pathname + '/delete',
+            url: window.location.pathname + 'delete',
             type: 'POST',
             success: function (res) {
                 window.location.href = redirectURL;
