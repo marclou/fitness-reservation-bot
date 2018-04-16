@@ -4,16 +4,35 @@ header {
     position: fixed;
     width: 100%;
     display: flex;
-    background-color: #CCC;
+    background-color: #437ed3;
 }
 
 header > p {
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+header > p > a {
+    color: white;
 }
 
 body {
-    padding: 20px;
-    margin-top: 75px;
+    margin-top: 80px;
+    margin-bottom: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    color: white;
+    background-color: #437ed3;
+    border: 0px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 footer {
@@ -26,5 +45,10 @@ footer {
 }
 
 footer > p {
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+footer > p > a {
+    color: black;
 }
