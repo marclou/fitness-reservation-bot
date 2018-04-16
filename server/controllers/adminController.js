@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const createError = require('http-errors');
-const { Admin } = require('./../models/admin');
+const { Admin } = require('./../models/index');
 
 module.exports = {
     getLoginForm: (req, res, next) => {

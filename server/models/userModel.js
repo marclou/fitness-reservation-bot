@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const { Workout } = require('./workout');
+const { Workout } = require('./index');
 
 const UserSchema = new mongoose.Schema({
     name: {
