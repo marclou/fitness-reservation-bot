@@ -35,7 +35,7 @@ function emailValidator(email) {
     if (config.env === 'development') {
         return true;
     }
-    return email === 'marc.louvion@gmail.com';
+    return email === 'marc.louvion@gmail.com' || email === 'wpwjh810@gmail.com';
 }
 
 function passwordValidator(password) {
