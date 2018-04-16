@@ -1,11 +1,14 @@
-$('#workout-remove').on('click', function (e) {
+$('#remove').on('click', function (e) {
+    // Disgusting.. to be modified
+    var redirectURL = '/dashboard/' + window.location.pathname.split('/')[2];
+
     e.preventDefault();
-    if (confirm('Are you sure? Workout will be deleted permanently.')) {
+    if (confirm('Are you sure? It will be deleted permanently.')) {
         $.ajax({
             url: window.location.pathname + '/delete',
             type: 'POST',
             success: function (res) {
-                window.location.href = '/dashboard/workout';
+                window.location.href = redirectURL;
                 alert('Successfully deleted :)');
             },
             error: function (err, err1, err2) {
@@ -39,5 +42,33 @@ $('#workout-add').on('submit', function () {
 
     $('#workout-add-payload [name="data"]').val(JSON.stringify(data));
     $('#workout-add-payload').submit();
+    return false;
+});
+
+$('#gym-add').on('submit', function () {
+    var values = {};
+    var data = {};
+    $.each($(this).serializeArray(), function () {
+        values[this.name] = this.value;
+    });
+
+    data = {
+        name: values['gym_name'],
+		address: {
+            value: values['gym_address_value'],
+            coordinates: {
+                longitude: values['gym_address_longitude'],
+                latitude: values['gym_address_latitude'],
+            },
+        },
+        maxAttendance: values['gym_maxAttendance'],
+        facilities: {
+            shower: values['gym_facilities_shower'],
+            dressRoom: values['gym_facilities_dressroom'],
+        },
+    };
+
+    $('#gym-add-payload [name="data"]').val(JSON.stringify(data));
+    $('#gym-add-payload').submit();
     return false;
 });
