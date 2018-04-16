@@ -19,14 +19,21 @@
     <label for="duration">Duration (min) : </label>
     <input type="number" id="duration" name="workout_duration" required>
   </p>
-  <p>
-    <label for="cost_indiv">Cost (indiv) : </label>
-    <input type="number" id="cost_indiv" name="workout_cost_indiv" required>
-  </p>
-  <p>
-    <label for="cost_group">Cost (group) : </label>
-    <input type="number" id="cost_group" name="workout_cost_group">
-  </p>
+
+  <fieldset>
+      <legend>
+          Costs
+      </legend>
+      <p>
+        <label for="cost_indiv">Individual : </label>
+        <input type="number" id="cost_indiv" name="workout_cost_indiv" required>
+      </p>
+      <p>
+        <label for="cost_group">Group (cost/person) : </label>
+        <input type="number" id="cost_group" name="workout_cost_group">
+      </p>
+  </fieldset>
+
   <p>
     <label for="date">Date : </label>
     <input data-toggle="datepicker" id="date" name="workout_date" required>
@@ -35,14 +42,21 @@
       <label for="time">Time : </label>
       <input class="timepicker" id="time" name="workout_time" required/>
   </p>
-  <p>
-    <label for="misc_kr">Misc (kr) : </label>
-    <textarea type="text" id="misc_kr" name="workout_misc_kr"></textarea>
-  </p>
-  <p>
-    <label for="misc_en">Misc (en) : </label>
-    <textarea id="misc_en" name="workout_misc_en"></textarea>
-  </p>
+
+  <fieldset>
+      <legend>
+          Miscellaneous
+      </legend>
+      <p>
+        <label for="misc_kr">Korean : </label>
+        <textarea type="text" id="misc_kr" name="workout_misc_kr"></textarea>
+      </p>
+      <p>
+        <label for="misc_en">English : </label>
+        <textarea id="misc_en" name="workout_misc_en"></textarea>
+      </p>
+  </fieldset>
+
   <p>
     <button type="submit">Validate workout</button>
   </p>

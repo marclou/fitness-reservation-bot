@@ -1,9 +1,9 @@
 {{> header}}
 
-<h3> Up-coming Workouts </h3>
+<h3> {{listName}} </h3>
 
-<ul id="workouts-list">
-  {{#each workouts}}
+<ul>
+  {{#each items}}
     <li>
       <p><a href="{{this.url}}">{{this.name}}</a></p>
     </li>

@@ -1,0 +1,29 @@
+{{> header}}
+
+  <h3>{{gym.name}}</h3>
+
+  <ul>
+    <li>
+      <p>
+          Address : <b>{{gym.address.value}}</b>
+      </p>
+    </li>
+    <li>
+      <p>
+          Max attendance : <b>{{gym.maxAttendance}}</b> people.
+      </p>
+    </li>
+    <li>
+      <p>
+          Facilities : {{#if gym.facilities.shower}} shower + {{/if}} {{#if gym.facilities.shower}} dressroom {{/if}}
+      </p>
+    </li>
+  </ul>
+
+  <p>
+      <button id="remove"> Remove Gym </button>
+  </p>
+
+{{> footer}}
+<script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
