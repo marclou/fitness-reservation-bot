@@ -1,7 +1,7 @@
-const { Gym } = require('./gym');
-const { Workout } = require('./workout');
-const { User } = require('./user');
-const { Admin } = require('./admin');
+const { Gym } = require('./gymModel');
+const { Workout } = require('./workoutModel');
+const { User } = require('./userModel');
+const { Admin } = require('./adminModel');
 
 module.exports = {
     Workout,
