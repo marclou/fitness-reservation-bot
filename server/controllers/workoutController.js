@@ -5,7 +5,11 @@ const { Workout, Gym } = require('./../models/index');
 module.exports = {
 	list: (req, res, next) => {
 		Workout.find({ date: { $gte: Date.now() } }).then((workouts) => {
-			res.render('dashboard', { workouts });
+			res.render('nameToUrlList', {
+				tabTitle: 'Workouts',
+				listName: 'Up-coming Workouts',
+				items: workouts,
+			});
 		}).catch((error) => {
 			next(createError(400, error));
 		});
@@ -78,7 +82,7 @@ module.exports = {
     		if (!workout) {
     			return next(createError(404, 'Workout not found, verify ID'));
     		}
-    		res.status(200).send({ workout: workout.toJSON() });
+    		res.status(200).send();
     	}).catch((error) => {
     		next(createError(400, error));
     	});
