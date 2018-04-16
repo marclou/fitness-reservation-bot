@@ -1,5 +1,5 @@
 const { indexRouter } = require('./main');
-const { dashboardRouter } = require('./dashboard');
+const { dashboardRouter } = require('./dashboard/index');
 const { webhookRouter } = require('./webhook');
 
 const init = (server) => {
