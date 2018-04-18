@@ -1,4 +1,4 @@
-/* eslint-disable */
+/*eslint-disable*/
 const _ = require('lodash');
 
 /**
@@ -10,9 +10,9 @@ const _ = require('lodash');
 const env = process.env.NODE_ENV || 'development';
 const defaultConfig = {
     env,
-    secret: 'IAmReallyHot',
 };
 const envConfig = require(`./${env}`);
+const secretConfig = require('./secret')
 
 /**
  * Set up some local environement variables such as mongodb URI.
@@ -22,4 +22,4 @@ if (env === 'development' || env === 'test') {
     process.env.MONGODB_URI = envConfig.mongodbUri;
 }
 
-module.exports = _.merge(defaultConfig, envConfig);
+module.exports = _.merge(defaultConfig, envConfig, secretConfig);
