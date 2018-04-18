@@ -40,6 +40,9 @@ module.exports = function () {
 		  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
 		  res.status(err.status || 500);
+		  if (err.status === 401) {
+			  return res.render('welcome');
+		  }
 		  res.render('error', { pageTitle: `Error ${err.status}`, error: err.message });
 		});
 
