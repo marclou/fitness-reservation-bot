@@ -35,7 +35,7 @@ function emailValidator(email) {
     if (config.env === 'development') {
         return true;
     }
-    return email === 'marc.louvion@gmail.com' || email === 'wpwjh810@gmail.com';
+    return config.adminMail.indexOf(email) > -1;
 }
 
 function passwordValidator(password) {
@@ -43,7 +43,7 @@ function passwordValidator(password) {
     if (config.env === 'development') {
         return true;
     }
-    return password.length > 4;
+    return password.length > 6;
 }
 
 AdminSchema.methods.generateAuthToken = function () {
