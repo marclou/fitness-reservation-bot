@@ -56,6 +56,15 @@ button#remove:hover {
     background-color: #FF0000;
 }
 
+button#navBack {
+    background-color: #e6e0e0;
+    color: black;
+}
+
+button#navBack:hover {
+    background-color: #d7d5d5;
+}
+
 footer {
     bottom: 0;
     left: 0;
