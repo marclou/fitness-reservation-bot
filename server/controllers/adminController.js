@@ -43,7 +43,7 @@ module.exports = {
     logout: (req, res, next) => {
         const { token } = req.cookies;
 
-        // Logging out erase all tokens so far. To be improved later.
+        // Logging out erase all tokens so far. Need to be improved later.
         Admin.findByToken(token).then((admin) => {
             return admin.update({ tokens: [] }).then(() => {
                 res.redirect('/dashboard');
