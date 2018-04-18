@@ -8,4 +8,4 @@ const testConfig = {
     publicDir: path.join(__dirname, '../../', '/public'),
 };
 
-module.exports = testConfig;qqs
+module.exports = testConfig;qq
