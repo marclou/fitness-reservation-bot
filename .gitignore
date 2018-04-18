@@ -8,6 +8,3 @@ errors.text
 
 # Dependency directory
 node_modules/
-
-#private
-/config/secret.js
