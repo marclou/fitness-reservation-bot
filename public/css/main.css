@@ -16,6 +16,11 @@ header > p > a {
     color: white;
 }
 
+.currentTab {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 body {
     margin-top: 80px;
     margin-bottom: 60px;
@@ -35,12 +40,12 @@ button {
     border-radius: 5px;
 }
 
-#remove {
-    background-color: #FF0000;
-}
-
 button > a {
     color: white;
+}
+
+#remove {
+    background-color: #FF0000;
 }
 
 footer {

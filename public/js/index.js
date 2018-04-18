@@ -1,3 +1,6 @@
+// Add specific CSS class (bold & underline) to the selected <a> link on header
+$("header > p > a[href='" + location.pathname + "']").addClass('currentTab');
+
 $('#remove').on('click', function (e) {
     // Disgusting.. to be modified
     var redirectURL = '/dashboard/' + window.location.pathname.split('/')[2];
