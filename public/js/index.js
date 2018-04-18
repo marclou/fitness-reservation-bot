@@ -1,5 +1,5 @@
 // Add specific CSS class (bold & underline) to the selected <a> link on header
-$("header > p > a[href='" + location.pathname + "']").addClass('currentTab');
+$("header > p > a[href*='" + location.pathname.split('/')[1] + '/' + location.pathname.split('/')[2] + "']").addClass('currentTab');
 
 $('#remove').on('click', function (e) {
     // Disgusting.. to be modified

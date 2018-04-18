@@ -9,6 +9,10 @@ module.exports = {
 				tabTitle: 'Workouts',
 				listName: 'Up-coming Workouts',
 				items: workouts,
+				action: {
+					url: '/dashboard/workout/create',
+					title: 'Add Workout',
+				},
 			});
 		}).catch((error) => {
 			next(createError(400, error));

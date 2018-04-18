@@ -9,6 +9,10 @@ module.exports = {
                 tabTitle: 'Gyms',
                 listName: 'Existing Gyms',
                 items: gyms,
+                action: {
+					url: '/dashboard/gym/create',
+					title: 'New Gym',
+				},
             });
     	}).catch((error) => {
     		next(createError(400, error));
