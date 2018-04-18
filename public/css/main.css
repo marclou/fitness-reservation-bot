@@ -44,7 +44,15 @@ button > a {
     color: white;
 }
 
-#remove {
+button:hover {
+    background-color: #435fd2;
+}
+
+button#remove {
+    background-color: #ff5400;
+}
+
+button#remove:hover {
     background-color: #FF0000;
 }
 
