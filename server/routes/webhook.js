@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     // Your verify token. Should be a random string.
-    const VERIFY_TOKEN = config.secret;
+    const { VERIFY_TOKEN } = config;
     // Parse the query params
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
@@ -33,8 +33,11 @@ router.post('/', (req, res) => {
         body.entry.forEach((entry) => {
             // Gets the message. entry.messaging is an array, but
             // will only ever contain one message, so we get index 0
-            const webhookEvent = entry.messaging[0];
-            console.log(webhookEvent);
+            const webhook_event = entry.messaging[0];
+            console.log(webhook_event);
+
+            const sender_psid = webhook_event.sender.id;
+            console.log('Sender PSID: ' + sender_psid);
         });
 
         res.status(200).send('EVENT_RECEIVED');
