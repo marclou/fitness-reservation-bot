@@ -7,8 +7,9 @@ module.exports = {
         let response;
         if (received_message.text) {
             response = {
-                'text': `You sent the message: "${received_message.text}". Now send me an image!`
+                'text': `You sent the message: "${received_message.text}". Now send me an image!`,
             };
+            console.log(response);
         }
         this.callSendAPI(sender_psid, response);
     },
@@ -26,6 +27,7 @@ module.exports = {
             },
             'message': response,
         };
+        console.log('sending..');
 
         request({
             'uri': 'https://graph.facebook.com/v2.6/me/messages',
