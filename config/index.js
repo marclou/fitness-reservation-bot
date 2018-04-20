@@ -22,4 +22,7 @@ if (env === 'development' || env === 'test') {
     process.env.MONGODB_URI = envConfig.mongodbUri;
 }
 
+// Set up the env variable to the credentials for using dialoigflow.
+process.env.GOOGLE_APPLICATION_CREDENTIALS = secretConfig.DIALOGFLOW_CREDENTIALS_PATH;
+
 module.exports = _.merge(defaultConfig, envConfig, secretConfig);

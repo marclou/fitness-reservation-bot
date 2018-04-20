@@ -16,7 +16,7 @@ router.use('/workout', workoutRouter);
 router.use('/gym', gymRouter);
 
 
-router.get('/', (req, res) => res.render('welcome'));
+router.get('/', (req, res) => res.redirect('/dashboard/workout'));
 
 router.get('/broadcast', adminController.authenticate, broadcastController.index);
 
