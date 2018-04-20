@@ -31,7 +31,7 @@ module.exports = function () {
 		server.use(express.json());
 		server.use(cookieParser());
 		server.use(express.urlencoded({ extended: false }));
-		server.use(favicon(`${config.publicDir}/images/favicon.ico`));
+		server.use(favicon(`${config.publicDir}/images/favicon/favicon.ico`));
 
 		// Set up routes
 		routes.init(server);
