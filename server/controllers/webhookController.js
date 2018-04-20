@@ -1,5 +1,6 @@
 const request = require('request');
 const config = require('./../../config');
+const dialogflowController = require('./dialogflowController');
 
 // Call Facebook Send API.
 const callSendAPI = (messageData) => {
@@ -38,6 +39,17 @@ const sendTypingOn = (sender_psid) => {
 	callSendAPI(responseData);
 };
 
+const sendTypingOff = (sender_psid) => {
+	const responseData = {
+		recipient: {
+			id: sender_psid,
+		},
+		sender_action: 'typing_off',
+	};
+
+	callSendAPI(responseData);
+};
+
 const sendMarkSeen = (sender_psid) => {
 	const responseData = {
 		recipient: {
@@ -55,16 +67,8 @@ const handleMessage = (sender_psid, received_message) => {
     let responseData;
 
     sendMarkSeen(sender_psid);
-    sendTypingOn(sender_psid);
     if (text) {
-        responseData = {
-            recipient: {
-                id: sender_psid,
-            },
-            message: {
-                text: `You sent the message: "${text}".`,
-            },
-        };
+        dialogflowController.receiveIntent(sender_psid, 'test', text);
     } else if (attachments) {
         responseData = {
             recipient: {
@@ -84,21 +88,14 @@ const handleMessage = (sender_psid, received_message) => {
             },
         };
     } else {
-        responseData = {
-            recipient: {
-                id: sender_psid,
-            },
-            message: {
-                text: 'I can not find the type of message you sent...',
-            },
-        };
+        throw new Error('Unknown received message type.');
     }
     callSendAPI(responseData);
 };
 
 // Handles messaging_postbacks events
 const handlePostback = (sender_psid, received_postback) => {
-
+    sendMarkSeen(sender_psid);
 };
 
 module.exports = {

@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
         body.entry.forEach((entry) => {
             const webhook_event = entry.messaging[0];
             const sender_psid = webhook_event.sender.id;
-
+            
             if (webhook_event.message) {
                 webhookController.handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
