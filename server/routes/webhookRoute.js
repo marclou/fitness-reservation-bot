@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
         if (mode === 'subscribe' && token === VERIFY_TOKEN) {
               res.status(200).send(challenge);
         } else {
+            console.error('Failed validation. Make sure the validation tokens match.');
             res.sendStatus(403);
         }
     }
@@ -21,7 +22,6 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     const { body } = req;
-    console.log(body);
 
     if (body.object === 'page') {
         body.entry.forEach((entry) => {
@@ -32,6 +32,8 @@ router.post('/', (req, res) => {
                 webhookController.handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
                 webhookController.handlePostback(sender_psid, webhook_event.postback);
+            } else {
+                console.log('Webhook received unknown messagingEvent: ', webhook_event);
             }
         });
         res.status(200).send('EVENT_RECEIVED');
