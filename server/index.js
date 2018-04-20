@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const favicon = require('serve-favicon');
 
 module.exports = function () {
 	const server = express();
@@ -30,6 +31,8 @@ module.exports = function () {
 		server.use(express.json());
 		server.use(cookieParser());
 		server.use(express.urlencoded({ extended: false }));
+		// Fav-Icon middleware
+		server.use(favicon(`${config.publicDir}/images/favicon.ico`));
 
 		// Set up routes
 		routes.init(server);
@@ -41,7 +44,7 @@ module.exports = function () {
 		  if (err.status === 401) {
 			  return res.render('welcome');
 		  }
-		  
+
 		  res.status(err.status || 500);
 		  res.render('error', { pageTitle: `Error ${err.status}`, error: err.message });
 		});
