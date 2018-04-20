@@ -1,4 +1,5 @@
 const express = require('express');
+const favicon = require('serve-favicon');
 const config = require('../../../config');
 const broadcastController = require('../../controllers/broadcastController');
 const adminController = require('../../controllers/adminController');
@@ -11,6 +12,8 @@ const router = express.Router();
 // Router Middleware
 router.use(express.static(config.publicDir));
 router.use(['/login', '/signup', '/broadcast'], express.static(config.publicDir));
+// Fav-Icon middleware
+router.use(favicon(`${config.publicDir}/images/favicon.ico`));
 // Sub-routes Middleware
 router.use('/workout', workoutRouter);
 router.use('/gym', gymRouter);
