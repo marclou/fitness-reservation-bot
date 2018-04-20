@@ -27,7 +27,6 @@ const callSendAPI = (messageData) => {
 	});
 };
 
-// Send the '3 dots' to let user knows his message is processing.
 const sendTypingOn = (sender_psid) => {
 	const responseData = {
 		recipient: {
@@ -39,18 +38,58 @@ const sendTypingOn = (sender_psid) => {
 	callSendAPI(responseData);
 };
 
+const sendMarkSeen = (sender_psid) => {
+	const responseData = {
+		recipient: {
+			id: sender_psid,
+		},
+		sender_action: 'mark_seen',
+	};
+
+	callSendAPI(responseData);
+};
+
 // Handles messages events
 const handleMessage = (sender_psid, received_message) => {
+    const { text, attachments, quick_reply } = received_message;
     let responseData;
 
+    sendMarkSeen(sender_psid);
     sendTypingOn(sender_psid);
-    if (received_message.text) {
+    if (text) {
         responseData = {
             recipient: {
                 id: sender_psid,
             },
             message: {
-                text: `You sent the message: "${received_message.text}". Now send me an image!`,
+                text: `You sent the message: "${text}".`,
+            },
+        };
+    } else if (attachments) {
+        responseData = {
+            recipient: {
+                id: sender_psid,
+            },
+            message: {
+                text: `You sent the attachment: "${attachments}".`,
+            },
+        };
+    } else if (quick_reply) {
+        responseData = {
+            recipient: {
+                id: sender_psid,
+            },
+            message: {
+                text: `You sent the attachment: "${attachments}".`,
+            },
+        };
+    } else {
+        responseData = {
+            recipient: {
+                id: sender_psid,
+            },
+            message: {
+                text: 'I can not find the type of message you sent...',
             },
         };
     }
@@ -61,7 +100,6 @@ const handleMessage = (sender_psid, received_message) => {
 const handlePostback = (sender_psid, received_postback) => {
 
 };
-
 
 module.exports = {
     handleMessage,
