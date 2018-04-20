@@ -16,6 +16,7 @@
         "consistent-return": "off",
         "no-mixed-spaces-and-tabs": "off",
         "quote-props": "off",
+        "camelcase": "off",
         "max-len": "warn",
         "comma-dangle": "warn",
         "arrow-body-style": "warn",

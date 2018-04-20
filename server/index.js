@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const favicon = require('serve-favicon');
 
 module.exports = function () {
 	const server = express();
@@ -30,6 +31,7 @@ module.exports = function () {
 		server.use(express.json());
 		server.use(cookieParser());
 		server.use(express.urlencoded({ extended: false }));
+		server.use(favicon(`${config.publicDir}/images/favicon/favicon.ico`));
 
 		// Set up routes
 		routes.init(server);
@@ -38,11 +40,11 @@ module.exports = function () {
 		server.use((err, req, res, next) => {
 		  res.locals.message = err.message;
 		  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-		  res.status(err.status || 500);
 		  if (err.status === 401) {
 			  return res.render('welcome');
 		  }
+
+		  res.status(err.status || 500);
 		  res.render('error', { pageTitle: `Error ${err.status}`, error: err.message });
 		});
 
