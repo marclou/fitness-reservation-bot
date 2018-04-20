@@ -33,7 +33,6 @@ router.post('/', (req, res) => {
                 webhookController.handlePostback(sender_psid, webhook_event.postback);
             }
         });
-
         res.status(200).send('EVENT_RECEIVED');
     } else {
         res.sendStatus(404);
