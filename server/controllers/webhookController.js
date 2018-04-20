@@ -29,27 +29,32 @@ const callSendAPI = (response) => {
 
 // Send the '3 dots' to let user knows his message is processing.
 const sendTypingOn = (sender_psid) => {
-	const messageData = {
+	const responseData = {
 		recipient: {
 			id: sender_psid,
 		},
 		sender_action: 'typing_on',
 	};
 
-	callSendAPI(messageData);
+	callSendAPI(responseData);
 };
 
 // Handles messages events
 const handleMessage = (sender_psid, received_message) => {
-    let response;
+    let responseData;
 
     sendTypingOn(sender_psid);
     if (received_message.text) {
-        response = {
-            'text': `You sent the message: "${received_message.text}". Now send me an image!`,
+        responseData = {
+            recipient: {
+                id: sender_psid,
+            },
+            message: {
+                text: `You sent the message: "${received_message.text}". Now send me an image!`,
+            },
         };
     }
-    callSendAPI(sender_psid, response);
+    callSendAPI(responseData);
 };
 
 // Handles messaging_postbacks events
