@@ -31,7 +31,6 @@ module.exports = function () {
 		server.use(express.json());
 		server.use(cookieParser());
 		server.use(express.urlencoded({ extended: false }));
-		// Fav-Icon middleware
 		server.use(favicon(`${config.publicDir}/images/favicon.ico`));
 
 		// Set up routes
